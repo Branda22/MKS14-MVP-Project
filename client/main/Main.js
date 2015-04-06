@@ -2,12 +2,15 @@ angular.module('MarketView.main', [])
 .controller('MainController', function ($scope, ChartAFactory, ChartBFactory, CompareFactory){
 	
 	$scope.click = function(){
-		var stockInfo = ChartAFactory.getData($scope.stockA);
-		stockInfo.currentData.then(function(data){
+		var stockAInfo = ChartAFactory.getData($scope.stockA);
+		stockAInfo.currentData.then(function(data){
 			console.log("Stock data", data);
 			$scope.stockAdata = data;
 		})
-		ChartBFactory.getData($scope.stockB);
+		var stockBInfo = ChartBFactory.getData($scope.stockB);
+		stockBInfo.currentData.then(function(data){
+			$scope.stockBdata = data;
+		})
 		CompareFactory.setNames($scope.stockA, $scope.stockB);
 	}
 })
