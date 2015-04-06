@@ -3,13 +3,13 @@ angular.module('MarketView.services', [])
 	console.log("Inside the chart A factory");
 	var chart1;
 	var container;
-	var stockData = [];
+	var stockData = null;
 	var ohlc = [];
 	var volume = [];
 	var stockNameA = "";
 	var getData = function(stock){
 		stockNameA = stock;
-		console.log(stock);
+		//GET HISTORICAL DATA INFORMATION
 		$http({
 			method: 'GET',
 			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+stock+'%22%20and%20startDate%20%3D%20%222014-09-11%22%20and%20endDate%20%3D%20%222015-03-10%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
@@ -17,6 +17,14 @@ angular.module('MarketView.services', [])
 			// console.log(json)
 			var data = json.data.query.results.quote;
 			OHLCdataParse(data);
+		})
+		//GET CURRENT QUOTE INFORMATION
+		$http({
+			method: 'GET',
+			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+stock+'%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
+		}).then(function(json){
+			stockData = json.data.query.results.quote;
+			console.log(stockData);
 		})
 	}
 
@@ -61,6 +69,7 @@ angular.module('MarketView.services', [])
 	}
 
 	return {
+		stockData: stockData,
 		container: container,
 		getData: getData,
 		OHLCdataParse: OHLCdataParse,
@@ -71,13 +80,12 @@ angular.module('MarketView.services', [])
 	console.log("Inside the chart B factory")
 	var chart1;
 	var container;
-	var stockData = [];
+	var stockData = null;
 	var ohlc = [];
 	var volume = [];
 	var stockNameA = "";
 	var getData = function(stock){
 		stockNameA = stock;
-		console.log(stock);
 		$http({
 			method: 'GET',
 			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+stock+'%22%20and%20startDate%20%3D%20%222014-09-11%22%20and%20endDate%20%3D%20%222015-03-10%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
@@ -85,6 +93,14 @@ angular.module('MarketView.services', [])
 			// console.log(json)
 			var data = json.data.query.results.quote;
 			OHLCdataParse(data);
+		})
+
+		$http({
+			method: 'GET',
+			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+stock+'%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
+		}).then(function(json){
+			stockData = json.data.query.results.quote
+			console.log(stockData);
 		})
 	}
 
@@ -132,6 +148,7 @@ angular.module('MarketView.services', [])
 	}
 
 	return {
+		stockData: stockData,
 		container: container,
 		getData: getData,
 		OHLCdataParse: OHLCdataParse,
@@ -143,15 +160,15 @@ angular.module('MarketView.services', [])
 	var parsedData = [];
 	var seriesData = [];
 	var setNames = function(stockA, stockB){
-		console.log("The two stocks are ", stockA, stockB);
 		names = [stockA, stockB];
 		getDataForNames(names);
 	}
 
 
 	var getDataForNames = function(){
+		seriesData = [];
+		parsedData = [];
 		names.forEach(function(name){
-			console.log("Fetching data for ", name);
 			$http({
 			method: 'GET',
 			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+name+'%22%20and%20startDate%20%3D%20%222014-09-11%22%20and%20endDate%20%3D%20%222015-03-10%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
@@ -164,7 +181,6 @@ angular.module('MarketView.services', [])
 	}
 
 	var OHLCdataParse = function(data){
-		console.log("Parsing data for ", data);
 		var ohlc = [];
 		for(var i = 0; i < data.length; i++){
 			ohlc.unshift([
@@ -186,7 +202,6 @@ angular.module('MarketView.services', [])
 				data: parsedData[i]
 			}
 		}
-		console.log("Series Data",seriesData);
 		renderChart();
 	}
 
