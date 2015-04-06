@@ -120,6 +120,9 @@ angular.module('MarketView.services', [])
 			data: {
 				dateFormat: "YYYY-mm-dd"
 			},
+			candlestick: {
+				animation: true
+			},
 			series : [{
 				type: 'candlestick',
 	            name : stockNameA,
@@ -138,6 +141,7 @@ angular.module('MarketView.services', [])
 .factory('CompareFactory', function ($http){
 	var names = [];
 	var parsedData = [];
+	var seriesData = [];
 	var setNames = function(stockA, stockB){
 		console.log("The two stocks are ", stockA, stockB);
 		names = [stockA, stockB];
@@ -176,7 +180,49 @@ angular.module('MarketView.services', [])
 			// ])
 		}
 		parsedData.push(ohlc);
-		console.log(parsedData);
+		for(var i = 0; i < parsedData.length; i++){
+			seriesData[i] = {
+				name: names[i],
+				data: parsedData[i]
+			}
+		}
+		console.log("Series Data",seriesData);
+		renderChart();
+	}
+
+	var renderChart = function(){
+		chart1 = new Highcharts.StockChart({
+			chart: {
+				renderTo: "containerC"
+			},
+			title: {
+				text: names[0] + " VS " + names[1]
+			},
+			rangeSelector: {
+				selected: 1
+			},
+			yAxis: {
+	            labels: {
+	                formatter: function () {
+	                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
+	                }
+	            },
+	            plotLines: [{
+	                value: 0,
+	                width: 2,
+	                color: 'silver'
+	            }]
+             },
+			data: {
+				dateFormat: "YYYY-mm-dd"
+			},
+			plotOptions: {
+				series:{
+					compare: "percent"
+				}
+			},
+			series: seriesData
+		});	
 	}
 
 	return {
