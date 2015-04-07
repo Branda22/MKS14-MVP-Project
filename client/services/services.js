@@ -262,5 +262,28 @@ angular.module('MarketView.services', ['MarketView.helpers'])
 		names: names,
 		setNames: setNames
 	}
+})
+.factory('AuthFactory', function ($http){
+	var signup = function(user){
+		return $http({
+			method: 'POST',
+			url: 'http://127.0.0.1:3000/signup',
+			data: { 'message': user } ,
+			headers: {'Content-Type': 'application/json'}
+		}).then(function(resp){
+			console.log(resp.data.message);
+			return resp.data.messsage;
+		})
+	}
 
+	var signin = function(user){
+		$http({
+			method: 'POST',
+			url: '' 
+		})
+	}
+	return {
+		signup: signup,
+		signin: signin
+	}
 });
