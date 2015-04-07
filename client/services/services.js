@@ -271,19 +271,23 @@ angular.module('MarketView.services', ['MarketView.helpers'])
 			data: { 'message': user } ,
 			headers: {'Content-Type': 'application/json'}
 		}).then(function(resp){
-			console.log(resp.data.message);
-			return resp.data.messsage;
+			console.log(resp.data);
+			return resp.data;
 		})
 	}
 
-	var signin = function(user){
-		$http({
+	var login = function(user){
+		return $http({
 			method: 'POST',
-			url: '' 
+			url: 'http://127.0.0.1:3000/login',
+			data: { 'message': user },
+			headers: { 'Content-Type' : 'application/json' }
+		}).then(function(resp){
+			return resp.data;
 		})
 	}
 	return {
 		signup: signup,
-		signin: signin
+		login: login
 	}
 });
