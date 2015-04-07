@@ -1,6 +1,7 @@
 var path = require('path')
 var express = require('express');
 var app = express();
+var db = require('./db/config');
 // app.use(express-static())
 
 var staticFolder = path.join(__dirname, '../client')

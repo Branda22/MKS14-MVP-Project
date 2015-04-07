@@ -1,0 +1,25 @@
+{
+  "name": "MKS14-MVP-Project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Branda22/MKS14-MVP-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Branda22/MKS14-MVP-Project/issues"
+  },
+  "homepage": "https://github.com/Branda22/MKS14-MVP-Project",
+  "dependencies": {
+    "bcrypt": "^0.8.2",
+    "bookshelf": "^0.7.9",
+    "knex": "^0.7.6",
+    "sqlite3": "^3.0.5"
+  }
+}
