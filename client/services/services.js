@@ -35,8 +35,8 @@ angular.module('MarketView.services', [])
 		for(var i = 0; i < data.length; i++){
 			var date = data[i]["Date"];
 			date = date.replace(/[-]/g, '.');
-			date = new Date(date).getTime() / 1000;
-			console.log("UNIX date", date);
+			date = new Date(date).getTime();
+
 			ohlc.unshift([
                 date, // the date
                 parseFloat(data[i]["Open"]), // open
@@ -119,9 +119,8 @@ angular.module('MarketView.services', [])
 			//MAKE STRING DATA INTO UNIX TIME.
 			var date = data[i]["Date"];
 			date = date.replace(/[-]/g, '.');
-			date = new Date(date).getTime() / 1000;
-			console.log("UNIX date", date);
-			
+			date = new Date(date).getTime();
+
 			ohlc.unshift([
                 date, // the date
                 parseFloat(data[i]["Open"]), // open
@@ -198,8 +197,11 @@ angular.module('MarketView.services', [])
 	var OHLCdataParse = function(data){
 		var ohlc = [];
 		for(var i = 0; i < data.length; i++){
+			var date = data[i]["Date"];
+			date = date.replace(/[-]/g, '.');
+			date = new Date(date).getTime();
 			ohlc.unshift([
-	            data[i]["Date"], // the date
+	            date, // the date
 	            parseFloat(data[i]["Open"]), // open
 	            parseFloat(data[i]["High"]), // high
 	            parseFloat(data[i]["Low"]), // low
