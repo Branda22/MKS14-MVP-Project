@@ -4,9 +4,6 @@ angular.module('MarketView', ['MarketView.main',
 .config(function ($routeProvider, $httpProvider){
 	$routeProvider
 		.when('/', {
-			
-		})
-		.when('/main', {
 			templateUrl: "main/main.html",
 			controller: "MainController"
 		})
