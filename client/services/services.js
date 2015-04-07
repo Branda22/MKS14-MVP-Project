@@ -33,8 +33,12 @@ angular.module('MarketView.services', [])
 	var OHLCdataParse = function(data){
 		ohlc = []; //reset the array to prevent mixed stock data.
 		for(var i = 0; i < data.length; i++){
+			var date = data[i]["Date"];
+			date = date.replace(/[-]/g, '.');
+			date = new Date(date).getTime() / 1000;
+			console.log("UNIX date", date);
 			ohlc.unshift([
-                data[i]["Date"], // the date
+                date, // the date
                 parseFloat(data[i]["Open"]), // open
                 parseFloat(data[i]["High"]), // high
                 parseFloat(data[i]["Low"]), // low
@@ -112,8 +116,14 @@ angular.module('MarketView.services', [])
 	var OHLCdataParse = function(data){
 		ohlc = [];
 		for(var i = 0; i < data.length; i++){
+			//MAKE STRING DATA INTO UNIX TIME.
+			var date = data[i]["Date"];
+			date = date.replace(/[-]/g, '.');
+			date = new Date(date).getTime() / 1000;
+			console.log("UNIX date", date);
+			
 			ohlc.unshift([
-                data[i]["Date"], // the date
+                date, // the date
                 parseFloat(data[i]["Open"]), // open
                 parseFloat(data[i]["High"]), // high
                 parseFloat(data[i]["Low"]), // low
