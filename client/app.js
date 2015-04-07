@@ -10,6 +10,6 @@ angular.module('MarketView', ['MarketView.main',
 		})
 		.when('/main', {
 			templateUrl: "main/main.html",
-			controller: "MainController"
+			controller: "MainController",
 		})
 })

@@ -1,63 +1,90 @@
+
 <div class="row">
 	<div class="col-md-6">
+		<input type="text" class="form-control" style="width: 40%;" ng-model="stockA">
+		<button class="btn btn-primary" ng-click="click()">Submit</button>
 		<table class="table">
 			<tr>
-				<td>Name</td>
+				<td class="active">Name</td>
 				<td>{{ stockAdata.Name }}</td>
+				<td class="active" class="active">Symbol</td>
+				<td>{{ stockAdata.Symbol }}</td>
 			</tr>
 			<tr>
-				<td>Bid</td>
+				<td class="active">Bid</td>
 				<td>{{ stockAdata.Bid }}</td>
+				<td class="active">EPS</td>
+				<td>{{ stockAdata.EarningsShare }}</td>
 			</tr>
 			<tr>
-				<td>Ask</td>
-				<td>{{ stockAdata.Ask }}</td></td>
+				<td class="active">Ask</td>
+				<td>{{ stockAdata.Ask }}</td>
+				<td class="active">Volume</td>
+				<td>{{ stockAdata.Volume }}</td>
 			</tr>
 			<tr>
-				<td>High</td>
-				<td>{{ stockAdata.DaysHigh }}</td>
+				<td class="active">Daily Change ($)</td>
+				<td>{{ stockAdata.Change }}</td>
+				<td class="active">Intraday Range</td>
+				<td>{{ stockAdata.DaysRange }}</td>
 			</tr>
 			<tr>
-				<td>Low</td>
-				<td>{{ stockAdata.DaysLow }}</td>
+				<td class="active">Daily % Change</td>
+				<td>{{ stockAdata.ChangeinPercent }}</td>
+				<td class="active">52 wk Range</td>
+				<td>{{ stockAdata.YearRange }}</td>
+			</tr>
+			<tr>
+				<td class="active">Market Cap</td>
+				<td>{{ stockAdata.MarketCapitalization }}</td>
+				<td class="active">50 MA</td>
+				<td>{{ stockAdata.FiftydayMovingAverage }}</td>
 			</tr>
 		</table>
-	</div>
-	<div class="col-md-6">
-		<table class="table">
-			<tr>
-				<td>Name</td>
-				<td>{{ stockBdata.Name }}</td>
-			</tr>
-			<tr>
-				<td>Bid</td>
-				<td>{{ stockBdata.Bid }}</td>
-			</tr>
-			<tr>
-				<td>Ask</td>
-				<td>{{ stockBdata.Ask }}</td></td>
-			</tr>
-			<tr>
-				<td>High</td>
-				<td>{{ stockBdata.DaysHigh }}</td>
-			</tr>
-			<tr>
-				<td>Low</td>
-				<td>{{ stockBdata.DaysLow }}</td>
-			</tr>
-		</table>		
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6">
-		<input type="text" class="input-medium search-query" ng-model="stockA">
-		<button class="btn btn-primary" ng-click="click()">Submit</button>
 		<h4>Chart View A</h4>
 		<div id="containerA" style="width:100%; height:600px;"></div>
 	</div>
 	<div class="col-md-6">
-		<input type="text" class="input-medium search-query" ng-model="stockB">
+		<input type="text" class="form-control" style="width: 40%;" ng-model="stockB">
 		<button class="btn btn-primary" ng-click="click()">Submit</button>
+		<table class="table">
+			<tr>
+				<td class="active">Name</td>
+				<td>{{ stockBdata.Name }}</td>
+				<td class="active">Symbol</td>
+				<td>{{ stockBdata.Symbol }}</td>
+			</tr>
+			<tr>
+				<td class="active">Bid</td>
+				<td>{{ stockBdata.Bid }}</td>
+				<td class="active">EPS</td>
+				<td>{{ stockBdata.EarningsShare }}</td>
+			</tr>
+			<tr>
+				<td class="active">Ask</td>
+				<td>{{ stockBdata.Ask }}</td>
+				<td class="active">Volume</td>
+				<td>{{ stockBdata.Volume }}</td>
+			</tr>
+			<tr>
+				<td class="active">Daily Change ($)</td>
+				<td>{{ stockBdata.Change }}</td>
+				<td class="active">Intraday Range</td>
+				<td>{{ stockBdata.DaysRange }}</td>
+			</tr>
+			<tr>
+				<td class="active">Daily % Change</td>
+				<td>{{ stockBdata.ChangeinPercent }}</td>
+				<td class="active">52 wk Range</td>
+				<td>{{ stockBdata.YearRange }}</td>
+			</tr>
+			<tr>
+				<td class="active">Market Cap</td>
+				<td>{{ stockBdata.MarketCapitalization }}</td>
+				<td class="active">50 MA</td>
+				<td>{{ stockBdata.FiftydayMovingAverage }}</td>
+			</tr>
+		</table>	
 		<h4>Chart View B</h4>
 		<div id="containerB" style="width:100%; height:600px;"></div>
 	</div>
